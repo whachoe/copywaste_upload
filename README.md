@@ -1,4 +1,4 @@
-!(https://copywaste.org/img/copywaste_logo.png)
+![Copywaste Logo](https://copywaste.org/img/copywaste_logo.png)
 # Copywaste uploader
 
 ## What?
