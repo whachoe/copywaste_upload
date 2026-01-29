@@ -16,6 +16,7 @@ if echo "$IMAGE" | grep -q "\/Screenshot.*\.png$" ; then
   IMGURL="https://ss.copywaste.org/img/$FILENAME"
   echo $IMGURL >> $LOGFILE
   echo "$IMGURL" | pbcopy
+  sleep 5
   /usr/local/bin/terminal-notifier -message "$IMGURL" -open "$IMGURL" -contentImage "$IMGURL" -title "New Screenshot" -subtitle "$IMGURL"
 fi
 
