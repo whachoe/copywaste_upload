@@ -4,19 +4,19 @@
 #
 
 #API_BASE=https://copywaste.org/rest.php?action=uploadImage
-IMAGE=$1
+IMAGE=$@
 LOGFILE=/tmp/copywaste_upload.log
+PHP_BINARY="/opt/homebrew/bin/php"
 
 echo "Incoming: $IMAGE" >> $LOGFILE 
-if echo $IMAGE | grep -q "\/Screenshot.*\.png$" ; then
+if echo "$IMAGE" | grep -q "\/Screenshot.*\.png$" ; then
   echo "IS SS: $IMAGE" >> $LOGFILE
-  FILENAME=`basename "$IMAGE"`
-  FILENAME=`php -r "echo rawurlencode('$FILENAME');"`
-#  IMGURL=`curl -F "file=@$IMAGE" -d "data=Screenshot" $API_BASE` 
+  FILENAME=`basename "$IMAGE" | jq -Rr @uri`
+  #echo "Basename: $FILENAME" >> $LOGFILE
   IMGURL="https://ss.copywaste.org/img/$FILENAME"
   echo $IMGURL >> $LOGFILE
-  echo $IMGURL | pbcopy
-  /usr/local/bin/terminal-notifier -message "$IMGURL" -open "$IMGURL" -contentImage "$IMGURL" -title "$IMGURL"
+  echo "$IMGURL" | pbcopy
+  /usr/local/bin/terminal-notifier -message "$IMGURL" -open "$IMGURL" -contentImage "$IMGURL" -title "New Screenshot" -subtitle "$IMGURL"
 fi
 
 
